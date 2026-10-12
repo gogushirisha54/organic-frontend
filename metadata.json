@@ -1,0 +1,6 @@
+{
+  "name": "Organica — Botanical & Organic Apothecary Market",
+  "description": "Full-stack organic e-commerce storefront and inventory platform for certified organic groceries, cold-pressed botanical skincare, adaptogenic wellness, and sustainable household goods.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

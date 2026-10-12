@@ -1,0 +1,25 @@
+# ============================================================================
+# ORGANICA SPRING BOOT BACKEND CONFIGURATION (EXAMPLE TEMPLATE)
+# Copy this file to application.properties or set environment variables
+# ============================================================================
+
+server.port=8080
+
+# MySQL 8.0+ Database Connection (Database Name: organica)
+spring.datasource.url=${DB_URL:jdbc:mysql://localhost:3306/organica?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+spring.datasource.username=${DB_USERNAME:root}
+spring.datasource.password=${DB_PASSWORD:your_mysql_password_here}
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# JPA & Hibernate Settings
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=false
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+# JWT Authentication Settings (Minimum 256-bit / 32-character secret for HMAC-SHA256)
+app.jwt.secret=${JWT_SECRET:replace_with_a_strong_256_bit_secret_key_for_organica_jwt_signing_2026}
+app.jwt.expiration-ms=${JWT_EXPIRATION_MS:86400000}
+
+# CORS Allowed Origins (Vite local dev ports 3000 and 5173)
+app.cors.allowed-origins=${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173}

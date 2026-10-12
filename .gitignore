@@ -1,0 +1,36 @@
+# Node & Frontend
+node_modules/
+frontend/node_modules/
+build/
+dist/
+frontend/dist/
+coverage/
+*.log
+
+# Java & Spring Boot Maven
+target/
+backend/target/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Environment & Secrets
+.env*
+!.env.example
+!frontend/.env.example
+backend/src/main/resources/application-local.properties
+backend/src/main/resources/application-prod.properties
+
+# OS & IDEs
+.DS_Store
+Thumbs.db
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
