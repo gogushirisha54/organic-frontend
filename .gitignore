@@ -34,3 +34,5 @@ Thumbs.db
 .classpath
 .project
 
+backend/
+*.sql
