@@ -16,7 +16,9 @@ import {
   fetchCouponsApi,
 } from "../services/api";
 
-const API_BASE_URL = "http://localhost:8080";
+
+
+const API_BASE_URL = "https://organic-backend-f1uh.onrender.com";
 
 export interface CartItem {
   productId: number;
@@ -201,6 +203,7 @@ async function authRequest(
   return result;
 }
 
+
 function extractToken(result: any): string | null {
   const token =
     result?.token ??
@@ -209,8 +212,13 @@ function extractToken(result: any): string | null {
     result?.data?.token ??
     result?.data?.accessToken;
 
-  return typeof token === "string" && token.length > 0 ? token : null;
+  return typeof token === "string" && token.trim()
+    ? token.trim()
+    : null;
 }
+
+    
+
 
 function extractUser(result: any, fallbackEmail?: string): any {
   const candidate =

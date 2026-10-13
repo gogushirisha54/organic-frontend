@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useStore } from "../context/StoreContext";
@@ -24,7 +25,9 @@ export const LoginPage: React.FC = () => {
       navigate("/");
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Unable to log in. Please try again.",
+        err instanceof Error
+          ? err.message
+          : "Unable to log in. Please try again.",
       );
     } finally {
       setLoading(false);
@@ -34,7 +37,9 @@ export const LoginPage: React.FC = () => {
   return (
     <section className="mx-auto max-w-md px-4 py-12">
       <h1 className="mb-2 text-3xl font-bold">Welcome Back</h1>
-      <p className="mb-6 text-gray-600">Log in to your Organica account.</p>
+      <p className="mb-6 text-gray-600">
+        Log in to your Organica account.
+      </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <label className="block">
@@ -62,7 +67,10 @@ export const LoginPage: React.FC = () => {
         </label>
 
         {error && (
-          <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-700">
+          <p
+            role="alert"
+            className="rounded-lg bg-red-50 p-3 text-sm text-red-700"
+          >
             {error}
           </p>
         )}
@@ -96,6 +104,10 @@ export const RegisterPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [postalCode, setPostalCode] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -109,7 +121,11 @@ export const RegisterPage: React.FC = () => {
         fullName: fullName.trim(),
         email: email.trim(),
         password,
-        phone: phone.trim() || undefined,
+        phone: phone.trim(),
+        address: address.trim(),
+        city: city.trim(),
+        state: state.trim(),
+        postalCode: postalCode.trim(),
       });
 
       navigate("/profile");
@@ -124,6 +140,9 @@ export const RegisterPage: React.FC = () => {
     }
   };
 
+  const inputClass =
+    "w-full rounded-lg border p-3 outline-none focus:border-green-700";
+
   return (
     <section className="mx-auto max-w-md px-4 py-12">
       <h1 className="mb-2 text-3xl font-bold">Create Your Account</h1>
@@ -135,7 +154,7 @@ export const RegisterPage: React.FC = () => {
         <label className="block">
           <span className="mb-1 block font-medium">Full name</span>
           <input
-            className="w-full rounded-lg border p-3 outline-none focus:border-green-700"
+            className={inputClass}
             type="text"
             autoComplete="name"
             value={fullName}
@@ -147,7 +166,7 @@ export const RegisterPage: React.FC = () => {
         <label className="block">
           <span className="mb-1 block font-medium">Email address</span>
           <input
-            className="w-full rounded-lg border p-3 outline-none focus:border-green-700"
+            className={inputClass}
             type="email"
             autoComplete="email"
             value={email}
@@ -157,34 +176,87 @@ export const RegisterPage: React.FC = () => {
         </label>
 
         <label className="block">
-          <span className="mb-1 block font-medium">Phone number (optional)</span>
+          <span className="mb-1 block font-medium">Phone number</span>
           <input
-            className="w-full rounded-lg border p-3 outline-none focus:border-green-700"
+            className={inputClass}
             type="tel"
             autoComplete="tel"
             value={phone}
             onChange={(event) => setPhone(event.target.value)}
+            required
           />
         </label>
 
         <label className="block">
           <span className="mb-1 block font-medium">Password</span>
           <input
-            className="w-full rounded-lg border p-3 outline-none focus:border-green-700"
+            className={inputClass}
             type="password"
             autoComplete="new-password"
-            minLength={6}
+            minLength={8}
+            maxLength={100}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             required
           />
           <span className="mt-1 block text-xs text-gray-500">
-            Use at least 6 characters.
+            Use at least 8 characters.
           </span>
         </label>
 
+        <label className="block">
+          <span className="mb-1 block font-medium">Address</span>
+          <input
+            className={inputClass}
+            type="text"
+            autoComplete="street-address"
+            value={address}
+            onChange={(event) => setAddress(event.target.value)}
+            required
+          />
+        </label>
+
+        <label className="block">
+          <span className="mb-1 block font-medium">City</span>
+          <input
+            className={inputClass}
+            type="text"
+            autoComplete="address-level2"
+            value={city}
+            onChange={(event) => setCity(event.target.value)}
+            required
+          />
+        </label>
+
+        <label className="block">
+          <span className="mb-1 block font-medium">State</span>
+          <input
+            className={inputClass}
+            type="text"
+            autoComplete="address-level1"
+            value={state}
+            onChange={(event) => setState(event.target.value)}
+            required
+          />
+        </label>
+
+        <label className="block">
+          <span className="mb-1 block font-medium">Postal code</span>
+          <input
+            className={inputClass}
+            type="text"
+            autoComplete="postal-code"
+            value={postalCode}
+            onChange={(event) => setPostalCode(event.target.value)}
+            required
+          />
+        </label>
+
         {error && (
-          <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm text-red-700">
+          <p
+            role="alert"
+            className="rounded-lg bg-red-50 p-3 text-sm text-red-700"
+          >
             {error}
           </p>
         )}
@@ -453,7 +525,10 @@ export const WishlistPage: React.FC = () => {
               product.productId ?? product.id ?? product.product?.id,
             );
             const name =
-              product.name ?? product.productName ?? product.title ?? "Product";
+              product.name ??
+              product.productName ??
+              product.title ??
+              "Product";
             const image =
               product.imageUrl ??
               product.image ??

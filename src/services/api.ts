@@ -1,3 +1,4 @@
+
 import type {
   AdminSalesSummaryDto,
   OrderDto,
@@ -5,7 +6,7 @@ import type {
   ProductDto,
 } from "../types";
 
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = "https://organic-backend-f1uh.onrender.com";
 
 /* -------------------- Base API Request -------------------- */
 
@@ -268,7 +269,6 @@ export async function submitCheckoutOrderApi(
   return post("/api/orders/checkout", data);
 }
 
-/** Compatibility export used by the checkout page. */
 export async function createOrder(
   data: Record<string, unknown>,
 ): Promise<any> {
